@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="dhdbstjr98">
+	<meta name="Keywords" content="Todo List">
+	<meta name="Description" content="Todo List">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="./css/materialize.min.css">
+	<link rel="stylesheet" href="./css/custom.css">
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script src="./js/materialize.min.js"></script>
+	<title>Todo List</title>
+</head>
+<body>
+	<div class="header">
+		<nav class="gnb teal accent-4">
+			<div class="nav-wrapper">
+				<a href="#" class="left menu-button">
+					<i class="material-icons">menu</i>
+				</a>
+				<span class="brand-logo center">Todo List</span>
+				<a href="#" class="right noti-button">
+					<i class="material-icons">notifications</i>
+				</a>
+			</div>
+		</nav>
+		<div class="left-menu green lighten-5 z-depth-3">
+			<div class="nav-wrapper">
+				<form>
+					<div class="input-field">
+						<input id="keyword" type="search" required autocomplete="off">
+						<label class="label-icon" for="keyword"><i class="material-icons">search</i></label>
+						<i class="material-icons">close</i>
+					</div>
+				</form>
+			</div>
+			<ul class="collection">
+				<li class="collection-item green lighten-5">전체</li>
+				<li class="collection-item green lighten-5">매우중요</li>
+				<li class="collection-item green lighten-5">중요</li>
+				<li class="collection-item green lighten-5">보통</li>
+				<li class="collection-item green lighten-5">마감임박</li>
+				<li class="collection-item green lighten-5">달성</li>
+				<li class="collection-item green lighten-5">미달성</li>
+			</ul>
+		</div>
+	</div>
+	<div class="content orange lighten-5" style="height:2000px;">
+
+	</div>
+	<div class="footer">
+
+	</div>
+</body>
+</html>
