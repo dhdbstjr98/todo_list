@@ -15,7 +15,7 @@
 	<script src="./js/custom.js"></script>
 	<title>Todo List</title>
 </head>
-<body>
+<body class="orange lighten-5">
 	<div class="header">
 		<nav class="gnb teal accent-4">
 			<div class="nav-wrapper">
@@ -38,7 +38,7 @@
 				</form>
 			</div>
 			<ul class="collection">
-				<li class="collection-item green lighten-5">
+				<li class="collection-item green lighten-5 active">
 					<a href="#">
 						<i class="material-icons light-blue-text text-accent-4">folder_open</i>
 						<span class="text">전체</span>
@@ -68,8 +68,15 @@
 				</li>
 				<li class="collection-item green lighten-5">
 					<a href="#">
-						<i class="material-icons purple-text text-lighten-3">access_alarm</i>
+						<i class="material-icons purple-text text-lighten-3">alarm</i>
 						<span class="text">마감임박</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons purple-text text-lighten-1">alarm_on</i>
+						<span class="text">마감</span>
 						<span class="count">4</span>
 					</a>
 				</li>
@@ -89,8 +96,30 @@
 				</li>
 			</ul>
 		</div>
+		<div class="notifications grey lighten-5 z-depth-3">
+			<ul class="collection">
+				<li class="collection-item avatar grey lighten-5">
+					<i class="noti-icon material-icons purple-text text-lighten-3">alarm</i>
+					<span class="title pink-text text-darken-3">마감임박</span>
+					<p>자신과 그들에게 오아이스도 이것을 반짝이는 열매를 풍부하게 때문이다. 영락과 위하여 우리는 거선의 있는가?</p>
+					<i class="star-icon material-icons grey-text text-lighten-1">star_border</i>
+				</li>
+				<li class="collection-item avatar grey lighten-5">
+					<i class="noti-icon material-icons light-blue-text text-accent-4">folder_open</i>
+					<span class="title pink-text text-darken-3">등록</span>
+					<p>가진 끝까지 풀밭에 말이다. 얼마나 안고, 얼마나 부패를 원질이 구할 인생에 기쁘며, 따뜻한 것이다.</p>
+					<i class="star-icon material-icons amber-text text-accent-4">star_half</i>
+				</li>
+				<li class="collection-item avatar grey lighten-5">
+					<i class="noti-icon material-icons purple-text text-lighten-1">alarm_on</i>
+					<span class="title pink-text text-darken-3">마감</span>
+					<p>Todo List 완성하기</p>
+					<i class="star-icon material-icons deep-orange-text text-lighten-1">star</i>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<div class="content orange lighten-5" style="height:2000px;">
+	<div class="content">
 
 	</div>
 	<div class="footer">

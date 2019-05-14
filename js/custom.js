@@ -11,4 +11,8 @@ $(function() {
 		$(this).parents(".left-menu .input-field").removeClass("focus");
 		$(this).parents(".left-menu").removeClass("focus");
 	});
+
+	$(".noti-button").click(function() {
+		$(".notifications").toggleClass("active");
+	});
 });
