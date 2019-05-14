@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="./css/custom.css">
 	<script src="./js/jquery-3.2.1.min.js"></script>
 	<script src="./js/materialize.min.js"></script>
+	<script src="./js/custom.js"></script>
 	<title>Todo List</title>
 </head>
 <body>
@@ -33,18 +34,59 @@
 					<div class="input-field">
 						<input id="keyword" type="search" required autocomplete="off">
 						<label class="label-icon" for="keyword"><i class="material-icons">search</i></label>
-						<i class="material-icons">close</i>
 					</div>
 				</form>
 			</div>
 			<ul class="collection">
-				<li class="collection-item green lighten-5">전체</li>
-				<li class="collection-item green lighten-5">매우중요</li>
-				<li class="collection-item green lighten-5">중요</li>
-				<li class="collection-item green lighten-5">보통</li>
-				<li class="collection-item green lighten-5">마감임박</li>
-				<li class="collection-item green lighten-5">달성</li>
-				<li class="collection-item green lighten-5">미달성</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons light-blue-text text-accent-4">folder_open</i>
+						<span class="text">전체</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons deep-orange-text text-lighten-1">star</i>
+						<span class="text">매우중요</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons amber-text text-accent-4">star_half</i>
+						<span class="text">중요</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons grey-text text-lighten-1">star_border</i>
+						<span class="text">보통</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons purple-text text-lighten-3">access_alarm</i>
+						<span class="text">마감임박</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons red-text text-accent-2">check_box</i>
+						<span class="text">달성</span>
+						<span class="count">4</span>
+					</a>
+				</li>
+				<li class="collection-item green lighten-5">
+					<a href="#">
+						<i class="material-icons pink-text text-lighten-2">check_box_outline_blank</i>
+						<span class="text">미달성</span>
+						<span class="count">4</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
