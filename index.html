@@ -32,63 +32,63 @@
 			<div class="nav-wrapper">
 				<form>
 					<div class="input-field">
-						<input id="keyword" type="search" required autocomplete="off">
+						<input id="keyword" type="search" autocomplete="off">
 						<label class="label-icon" for="keyword"><i class="material-icons">search</i></label>
 					</div>
 				</form>
 			</div>
 			<ul class="collection">
 				<li class="collection-item green lighten-5 active">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons light-blue-text text-accent-4">folder_open</i>
 						<span class="text">전체</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons deep-orange-text text-lighten-1">star</i>
 						<span class="text">매우중요</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons amber-text text-accent-4">star_half</i>
 						<span class="text">중요</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons grey-text text-lighten-1">star_border</i>
 						<span class="text">보통</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons purple-text text-lighten-3">alarm</i>
 						<span class="text">마감임박</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons purple-text text-lighten-1">alarm_on</i>
 						<span class="text">마감</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons red-text text-accent-2">check_box</i>
 						<span class="text">달성</span>
 						<span class="count">4</span>
 					</a>
 				</li>
 				<li class="collection-item green lighten-5">
-					<a href="#">
+					<a href="#" class="waves-effect waves-green">
 						<i class="material-icons pink-text text-lighten-2">check_box_outline_blank</i>
 						<span class="text">미달성</span>
 						<span class="count">4</span>
@@ -120,7 +120,101 @@
 		</div>
 	</div>
 	<div class="content">
-
+		<div class="write z-depth-2">
+			<form id="write-form">
+				<input type="hidden" name="star" value="0" id="write-star">
+				<i class="material-icons placeholder-icon">add</i>
+				<div class="input-field subject">
+					<input type="text" name="subject" autocomplete="off" id="write-subject" required placeholder="할일을 입력해주세요.">
+					<label for="write-subject" class="required">제목</label>
+					<i class="material-icons write-star grey-text text-lighten-1" id="write-star-icon">star_border</i>
+				</div>
+				<div class="input-field contents">
+					<textarea name="content" id="write-contents" class="materialize-textarea" required></textarea>
+					<label for="write-contents" class="required">내용</label>
+				</div>
+				<div class="input-field date">
+					<input type="text" class="datepicker" name="date" autocomplete="off" id="write-date">
+					<label for="write-date">마감</label>
+				</div>
+				<div class="input-field button">
+					<button class="btn waves-effect waves-light light-green darken-2" type="submit" name="action">추가</button>
+				</div>
+			</form>
+		</div>
+		<div class="todo-list">
+			<ul class="collapsible">
+				<li>
+					<div class="collapsible-header">
+						<i class="list-check material-icons red-text text-accent-2">check_box</i>
+						<span class="subject">First</span>
+						<span class="date light-blue-text text-lighten-1">30일</span>
+						<i class="material-icons list-star grey-text text-lighten-1">star_border</i>
+					</div>
+					<div class="collapsible-body white">
+						<p>Lorem ipsum dolor sit amet.</p>
+						<div class="button">
+							<a class="btn-small waves-effect waves-light cyan darken-2 modal-trigger" href="#edit">
+								<i class="material-icons text-white">edit</i>
+							</a>
+							<a class="btn-small waves-effect waves-light red accent-2 modal-trigger" href="#close-confirm">
+								<i class="material-icons text-white">delete</i>
+							</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header">
+						<i class="list-check material-icons red-text text-accent-2">check_box</i>
+						<span class="subject">First</span>
+						<i class="material-icons list-star amber-text text-accent-4">star_half</i>
+					</div>
+					<div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+				</li>
+				<li>
+					<div class="collapsible-header">
+						<i class="list-check material-icons pink-text text-lighten-2">check_box_outline_blank</i>
+						<span class="subject">First</span>
+						<i class="material-icons list-star deep-orange-text text-lighten-1">star</i>
+					</div>
+					<div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+				</li>
+			</ul>
+		</div>
+		<div id="close-confirm" class="modal">
+			<div class="modal-content">
+				<h4>경고</h4>
+				<p>삭제 후에는 복구할 수 없습니다. 정말 삭제하시겠습니까?</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat">예</a>
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat">아니오</a>
+			</div>
+		</div>
+		<div id="edit" class="modal edit">
+			<div class="modal-content">
+				<form id="edit-form">
+					<input type="hidden" name="star" value="0" id="edit-star">
+					<div class="input-field subject">
+						<input type="text" name="subject" autocomplete="off" id="edit-subject" required>
+						<label for="edit-subject" class="required">제목</label>
+						<i class="material-icons edit-star grey-text text-lighten-1" id="edit-star-icon">star_border</i>
+					</div>
+					<div class="input-field contents">
+						<textarea name="content" id="edit-contents" class="materialize-textarea" required></textarea>
+						<label for="edit-contents" class="required">내용</label>
+					</div>
+					<div class="input-field date">
+						<input type="text" class="datepicker" name="date" autocomplete="off" id="edit-date">
+						<label for="edit-date">마감</label>
+					</div>
+					<div class="input-field button">
+						<button class="btn waves-effect waves-light light-green darken-2" type="submit" name="action">수정</button>
+						<button class="btn waves-effect waves-light red accent-2 modal-close" type="button" name="action">취소</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 	<div class="footer">
 
