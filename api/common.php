@@ -8,6 +8,7 @@ if(!defined("_INCLUDED_")) {
 }
 
 define("_TIME_", time());
+define("_DATE_", date("Y-m-d", _TIME_));
 define("_DATETIME_", date("Y-m-d H:i:s", _TIME_));
 
 include_once("./class/DB.class.php");
@@ -37,18 +38,12 @@ function required_param() {
 function included_param() {
 	$params = func_get_args();
 
-	$result = array();
-
 	foreach($params as $param) {
-		if(!empty($_REQUEST[$param])) {
+		if(isset($_REQUEST[$param]))
 			$GLOBALS[$param] = $_REQUEST[$param];
-			$result[$param] = $_REQUEST[$param];
-		} else {
-			$GLOBALS[$param] = false;
-		}
+		else
+			$GLOBALS[$param] = null;
 	}
-
-	return $result;
 }
 
 abstract class UsingParamException extends Exception {

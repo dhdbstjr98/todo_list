@@ -20,4 +20,18 @@ class DB {
 		$st->execute($array);
 		return $st;
 	}
+
+	static public function fetch($sql, $array=[]) {
+		$st = self::query($sql, $array);
+		return $st->fetch(PDO::FETCH_ASSOC);
+	}
+
+	static public function fetch_all($sql, $array=[]) {
+		$st = self::query($sql, $array);
+		return $st->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	static public function insert_id() {
+		return self::$db->lastInsertId();
+	}
 }
