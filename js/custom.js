@@ -63,16 +63,6 @@ $(function() {
 		$(".notifications").removeClass("active");
 		$(".body").removeClass("noti-active");
 	});
-	$(".left-menu .input-field input").on("focus", function() {
-		$(this).parents(".left-menu .input-field").addClass("focus");
-		$(this).parents(".left-menu").addClass("focus");
-		$(".body").addClass("left-focus");
-	});
-	$(".left-menu .input-field input").on("blur", function() {
-		$(this).parents(".left-menu .input-field").removeClass("focus");
-		$(this).parents(".left-menu").removeClass("focus");
-		$(".body").removeClass("left-focus");
-	});
 	$(".left-menu").on("mouseover", function() {
 		$(".body").addClass("left-hover");
 	});
