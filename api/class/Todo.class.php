@@ -33,13 +33,13 @@ class Todo {
 					$break_point = $value !== null && (!preg_match("/^2\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/", $value) || $value < _DATE_);
 					break;
 				case "star":
-					$break_point = $value !== null && (!in_array($value, ["0","1","2"]));
+					$break_point = $value !== null && !in_array($value, ["0","1","2"]);
 					break;
 				case "is_done":
-					$break_point = $value !== null && (!in_array($value, ["0","1"]));
+					$break_point = $value !== null && !in_array($value, ["0","1"]);
 					break;
 				case "is_impending":
-					$break_point = $value !== null && (!in_array($value, ["impending","dead"]));
+					$break_point = $value !== null && !in_array($value, ["impending","dead"]);
 					break;
 			}
 
@@ -102,14 +102,14 @@ class Todo {
 				throw new InvalidParamException("is_impending");
 
 			if($is_impending == "impending") {
-				$sql_where .= " and `td_deadline` between :now and :deadline ";
+				$sql_where .= " and `td_deadline` >= :now and `td_deadline` <= :impending_date ";
 
-				$sql_column['now']		= _DATE_;
-				$sql_column['deadline']	= self::IMPENDING_DATE;
-			} else if($is_impending == "dead") {
-				$sql_where .= " and `td_deadline` < :deadline ";
+				$sql_column['now']				= _DATE_;
+				$sql_column['impending_date']	= self::IMPENDING_DATE;
+			} elseif($is_impending == "dead") {
+				$sql_where .= " and `td_deadline` < :now ";
 
-				$sql_column['deadline']	= self::IMPENDING_DATE;
+				$sql_column['now']	= _TIME_;
 			}
 		}
 
@@ -152,16 +152,19 @@ class Todo {
 									"data"	=>	["star"=>0]
 								],
 			"impending"		=>	[
-									"sql"	=>	" `td_deadline` between :now and :deadline and `td_is_done` = :is_done ",
+									"sql"	=>	" `td_deadline` >= :now and `td_deadline` <= :impending_date and `td_is_done` = :is_done ",
 									"data"	=>	[
-													"now"		=> _DATETIME_,
-													"deadline"	=> self::IMPENDING_DATE,
-													"is_done"	=> 0
+													"now"				=> _DATE_,
+													"impending_date"	=> self::IMPENDING_DATE,
+													"is_done"			=> 0
 												]
 								],
 			"dead"			=>	[
-									"sql"	=>	" `td_deadline` < :deadline ",
-									"data"	=>	["deadline"=>self::IMPENDING_DATE]
+									"sql"	=>	" `td_deadline` < :now and `td_is_done` = :is_done ",
+									"data"	=>	[
+													"now"		=>_DATE_,
+													"is_done"	=> 0
+												]
 								],
 			"done"			=>	[
 									"sql"	=>	" `td_is_done` = :is_done ",
@@ -210,6 +213,7 @@ class Todo {
 
 	public function get_detail() {
 		return [
+			"no"		=> $this->no,
 			"subject"	=> $this->subject,
 			"content"	=> $this->content,
 			"deadline"	=> $this->deadline,
@@ -247,24 +251,33 @@ class Todo {
 		
 		$sql_set	= "";
 		$sql_column	= ["no"=>$this->no];
+		$use_comma = false;
 
 		if($subject !== null) {
 			$sql_set .= " `td_subject` = :subject";
 			$sql_column['subject'] = $subject;
 		}
 		if($content !== null) {
+			if(count($sql_column) > 1)
+				$sql_set .= " , ";
 			$sql_set .= " `td_content` = :content";
 			$sql_column['content'] = $content;
 		}
 		if($deadline !== null) {
+			if(count($sql_column) > 1)
+				$sql_set .= " , ";
 			$sql_set .= " `td_deadline` = :deadline";
 			$sql_column['deadline'] = $deadline;
 		}
 		if($star !== null) {
+			if(count($sql_column) > 1)
+				$sql_set .= " , ";
 			$sql_set .= " `td_star` = :star";
 			$sql_column['star'] = $star;
 		}
 		if($is_done !== null) {
+			if(count($sql_column) > 1)
+				$sql_set .= " , ";
 			$sql_set .= " `td_is_done` = :is_done";
 			$sql_column['is_done'] = $is_done;
 		}
@@ -276,6 +289,30 @@ class Todo {
 			"UPDATE `todo` SET {$sql_set} WHERE `td_no` = :no",
 			$sql_column
 		);
+	}
+
+	public function is_impending() {
+		return !$this->is_done && ($this->deadline >= _DATE_) && ($this->deadline <= Todo::IMPENDING_DATE);
+	}
+
+	public function is_dead() {
+		return !$this->is_done && ($this->deadline < _DATE_);
+	}
+
+	public function get_no() {
+		return $this->no;
+	}
+
+	public function get_subject() {
+		return $this->subject;
+	}
+
+	public function get_content() {
+		return $this->content;
+	}
+
+	public function get_deadline() {
+		return $this->deadline;
 	}
 }
 
