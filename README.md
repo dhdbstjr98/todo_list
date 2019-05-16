@@ -22,6 +22,7 @@ ubuntu 16.04 기준이며, 아래 방법은 root 계정으로 진행하였습니
 
 4. php 설치
 >apt-get install php php-mysql php-mbstring -y
+
 >apt-get install libapache2-mod-php -y
 
 5. git clone
