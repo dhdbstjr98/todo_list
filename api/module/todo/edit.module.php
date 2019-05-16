@@ -22,8 +22,13 @@ try {
 		Notification::insert("edit", $todo->get_no());
 
 	if($deadline !== null) {
-		Notification::trace_impending($todo->get_no());
-		Notification::trace_dead($todo->get_no());
+		if($deadline == "") {
+			Notification::remove("impending", $todo->get_no());
+			Notification::remove("dead", $todo->get_no());
+		} else {
+			Notification::trace_impending($todo->get_no());
+			Notification::trace_dead($todo->get_no());
+		}
 	}
 
 	if($is_done !== null) {

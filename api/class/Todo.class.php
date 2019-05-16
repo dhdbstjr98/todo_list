@@ -30,7 +30,7 @@ class Todo {
 					$break_point = $value !== null && (mb_strlen($value) > 65535 || mb_strlen($value) < 1);
 					break;
 				case "deadline":
-					$break_point = $value !== null && (!preg_match("/^2\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/", $value) || $value < _DATE_);
+					$break_point = $value !== null && $value != "" && (!preg_match("/^2\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/", $value) || $value < _DATE_);
 					break;
 				case "star":
 					$break_point = $value !== null && !in_array($value, ["0","1","2"]);
@@ -51,6 +51,9 @@ class Todo {
 	}
 
 	static public function insert($subject, $content, $deadline, $star) {
+		if($deadline == "")		// deadline은 null이 될 수 있음
+			$deadline = null;
+
 		if($invalid_param = self::are_columns_invalid(
 			[
 				"subject"	=> $subject,
@@ -267,7 +270,7 @@ class Todo {
 			if(count($sql_column) > 1)
 				$sql_set .= " , ";
 			$sql_set .= " `td_deadline` = :deadline";
-			$sql_column['deadline'] = $deadline;
+			$sql_column['deadline'] = ($deadline == "") ? null : $deadline;
 		}
 		if($star !== null) {
 			if(count($sql_column) > 1)
