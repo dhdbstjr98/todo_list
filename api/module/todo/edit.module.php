@@ -31,21 +31,23 @@ try {
 		}
 	}
 
-	if($is_done !== null) {
+	if($is_done !== null && $is_done != $todo->get_is_done()) {
 		if($is_done)
 			Notification::insert("done", $todo->get_no());
 		else
 			Notification::remove("done", $todo->get_no());
 	}
 
-	if($star !== null)
+	if($star !== null && $star != $todo->get_star()) {
+		Notification::remove("star", $todo->get_no());
 		Notification::insert("star", $todo->get_no());
+	}
 
 	json_result(true, "success");
 } catch(EmptyParamException $e) {
 	json_result(false, "empty_param", ["param"=>$e->get_data()]);
 } catch(InvalidParamException $e) {
-	json_result(false, "invalid_column", ["column"=>$e->get_data()]);
+	json_result(false, "invalid_param", ["param"=>$e->get_data()]);
 } catch(NonExistentTodoException $e) {
 	json_result(false, "nonexistent_todo");
 } catch(Exception $e) {

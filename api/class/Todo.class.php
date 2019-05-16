@@ -30,7 +30,7 @@ class Todo {
 					$break_point = $value !== null && (mb_strlen($value) > 65535 || mb_strlen($value) < 1);
 					break;
 				case "deadline":
-					$break_point = $value !== null && $value != "" && (!preg_match("/^2\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/", $value) || $value < _DATE_);
+					$break_point = $value !== null && $value != "" && !preg_match("/^2\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/", $value);
 					break;
 				case "star":
 					$break_point = $value !== null && !in_array($value, ["0","1","2"]);
@@ -88,7 +88,7 @@ class Todo {
 
 	static public function get_list($star=null, $is_impending=null, $is_done=null) {
 		$sql_where	= " 1 ";
-		$sql_order	= " `td_star` DESC, `td_is_done` ASC, `td_deadline` ASC, `td_no` DESC ";
+		$sql_order	= " `td_star` DESC, `td_is_done` ASC, `td_deadline` DESC, `td_no` DESC ";
 		$sql_column	= [];
 		$result		= [];
 
@@ -112,7 +112,7 @@ class Todo {
 			} elseif($is_impending == "dead") {
 				$sql_where .= " and `td_deadline` < :now ";
 
-				$sql_column['now']	= _TIME_;
+				$sql_column['now']	= _DATE_;
 			}
 		}
 
@@ -220,9 +220,23 @@ class Todo {
 			"subject"	=> $this->subject,
 			"content"	=> $this->content,
 			"deadline"	=> $this->deadline,
+			"remainder"	=> $this->get_remainder(),
 			"star"		=> $this->star,
 			"is_done"	=> $this->is_done
 		];
+	}
+
+	public function get_remainder() {
+		if(!$this->deadline)
+			return "";
+
+		$remainder = (int)((strtotime($this->deadline) - strtotime(_DATE_)) / 86400);
+		if($remainder < 0)
+			return "마감";
+		elseif($remainder == 0)
+			return "오늘";
+		else
+			return "{$remainder}일";
 	}
 
 	public function remove() {
@@ -295,11 +309,11 @@ class Todo {
 	}
 
 	public function is_impending() {
-		return !$this->is_done && ($this->deadline >= _DATE_) && ($this->deadline <= Todo::IMPENDING_DATE);
+		return !$this->is_done && $this->deadline != null && ($this->deadline >= _DATE_) && ($this->deadline <= Todo::IMPENDING_DATE);
 	}
 
 	public function is_dead() {
-		return !$this->is_done && ($this->deadline < _DATE_);
+		return !$this->is_done && $this->deadline != null && ($this->deadline < _DATE_);
 	}
 
 	public function get_no() {
@@ -316,6 +330,14 @@ class Todo {
 
 	public function get_deadline() {
 		return $this->deadline;
+	}
+
+	public function get_star() {
+		return $this->star;
+	}
+
+	public function get_is_done() {
+		return $this->is_done;
 	}
 }
 

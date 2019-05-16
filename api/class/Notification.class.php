@@ -170,9 +170,17 @@ class Notification {
 	}
 
 	public function get_detail() {
+		if($this->type != "hello")
+			$todo = Todo::get_todo($this->td_no);
+
 		return [
-			"type"	=> $this->type,
-			"td_no"	=> $this->td_no
+			"type"		=> $this->type,
+			"subject"	=> (($this->type != "hello")
+								? $todo->get_subject()
+								: "이곳에서 알림을 확인하실 수 있습니다."),
+			"star"		=> (($this->type != "hello")
+								? $todo->get_star()
+								: null)
 		];
 	}
 }
