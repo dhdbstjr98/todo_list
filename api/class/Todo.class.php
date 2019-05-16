@@ -73,8 +73,8 @@ class Todo {
 				`td_is_done`		= 0,
 				`td_registered_at`	= :registered_at",
 			[
-				"subject"		=> $subject,
-				"content"		=> $content,
+				"subject"		=> htmlspecialchars($subject),
+				"content"		=> htmlspecialchars($content),
 				"deadline"		=> $deadline,
 				"star"			=> $star,
 				"registered_at"	=> _DATETIME_
@@ -272,13 +272,13 @@ class Todo {
 
 		if($subject !== null) {
 			$sql_set .= " `td_subject` = :subject";
-			$sql_column['subject'] = $subject;
+			$sql_column['subject'] = htmlspecialchars($subject);
 		}
 		if($content !== null) {
 			if(count($sql_column) > 1)
 				$sql_set .= " , ";
 			$sql_set .= " `td_content` = :content";
-			$sql_column['content'] = $content;
+			$sql_column['content'] = htmlspecialchars($content);
 		}
 		if($deadline !== null) {
 			if(count($sql_column) > 1)
