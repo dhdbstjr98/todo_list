@@ -88,7 +88,7 @@ class Todo {
 
 	static public function get_list($star=null, $is_impending=null, $is_done=null) {
 		$sql_where	= " 1 ";
-		$sql_order	= " `td_star` DESC, `td_is_done` ASC, `td_deadline` DESC, `td_no` DESC ";
+		$sql_order	= " `td_star` DESC, `td_is_done` ASC, `td_deadline` ASC, `td_no` DESC ";
 		$sql_column	= [];
 		$result		= [];
 
